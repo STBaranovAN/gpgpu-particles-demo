@@ -312,10 +312,7 @@ var _createClass = function () {function defineProperties(target, props) {for (v
     points.render(renderer, time);
     renderer.render(scene, camera);
   };
-  var renderLoop = function renderLoop() {
-    render();
-    requestAnimationFrame(renderLoop);
-  };
+  
   var touchStart = function touchStart(isTouched) {
     isDrag = true;
     points.touchStart(vectorTouchStart);

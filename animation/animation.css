@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Homenaje');
 .p-canvas-webgl {
-    position: fixed;
-    ;
-    z-index: 1;
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important; 
+    z-index: -1;
     top: 0;
     left: 0;
 }

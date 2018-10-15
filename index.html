@@ -17,8 +17,13 @@
 
 <body style="max-width: 1800px; margin: auto;">
 
+  <h3 style="color: red">ANIMATION</h3>
+
+  <input id="btnAnimToggle" type=button class="btn btn-danger" onclick="btnAnimToggleClick(this)" value="Stop" />
+
   <div id="container" class="p-summary"></div>
-  <canvas class="p-canvas-webgl" id="canvas-webgl"></canvas>
+  <canvas class="p-canvas-webgl" id="canvas-webgl">
+  </canvas>
 
   <script id="vs-physics-renderer" type="x-shader/x-vertex">
   varying vec2 vUv;
@@ -249,6 +254,8 @@
 <script src="animation/animation.js"></script>
 
 <script>
+  var animate = true;
+
   var init = function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x111111, 1.0);
@@ -262,6 +269,14 @@
     renderLoop();
   };
 
+  var renderLoop = function renderLoop() {
+    render();
+    if(animate)
+    {
+      requestAnimationFrame(renderLoop);
+    }
+  };
+
 	$(document).ready(function(){
 		if (WEBGL.isWebGLAvailable()) {
 		  init();
@@ -269,8 +284,17 @@
 		  var warning = WEBGL.getWebGLErrorMessage();
 		  document.getElementById('container').appendChild(warning);
 		}	
-	});
-
+  });
+  
+  function btnAnimToggleClick(btn){
+    if(btn)
+    {
+      animate = !animate;
+      btn.value = animate ? "Stop" : "Start";
+      animate ? $("#btnAnimToggle").removeClass('btn-success').addClass('btn-danger') : $("#btnAnimToggle").removeClass('btn-danger').addClass('btn-success');
+      animate && renderLoop();
+    }
+  }
 </script>
 
 </body>
